@@ -6,19 +6,21 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 
 import ru.custom.azilla.GameSettings;
 import ru.custom.azilla.elements.PhysicalObject;
+import ru.custom.azilla.managers.SFXManager;
 
 public class Player extends PhysicalObject {
 
     boolean fliped;
 
     int jumpAmount = 1;
+
+    int defaultJumpAmount = 1;
 
     private Animation<TextureRegion> idleAnimation;
     private Animation<TextureRegion> runAnimation;
@@ -42,7 +44,10 @@ public class Player extends PhysicalObject {
         this.jumpAmount = jumpAmount;
     }
     public void moveUp() {
-        body.setLinearVelocity(body.getLinearVelocity().x, GameSettings.JUMP_SPEED);
+        if (jumpAmount > 0) {
+            body.setLinearVelocity(body.getLinearVelocity().x, GameSettings.JUMP_SPEED);
+        }
+        jumpAmount--;
     }
 
     public void moveSide(int coefficient) {
@@ -65,6 +70,23 @@ public class Player extends PhysicalObject {
             batch.draw(curentAnimation.getKeyFrame(timer),
                 drawableX, drawableY, width, height);
         }
+    }
+
+    public void moveSideWithSound(int coefficient, SFXManager sfxManager) {
+        sfxManager.playDash();
+    }
+
+    public void moveUpWithSound(SFXManager sfxManager) {
+        sfxManager.playJump();
+        moveUp();
+    }
+
+    public void setDefaultJumpAmount(int defaultJumpAmount) {
+        this.defaultJumpAmount = defaultJumpAmount;
+    }
+
+    public void resetJumpAmount() {
+        jumpAmount = defaultJumpAmount;
     }
 
     private void createAnimations() {
@@ -121,4 +143,5 @@ public class Player extends PhysicalObject {
             region.getTexture().dispose();
         }
     }
+
 }

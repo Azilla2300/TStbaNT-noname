@@ -21,6 +21,7 @@ import ru.custom.azilla.characters.Platform;
 import ru.custom.azilla.characters.PlatformInteractable;
 import ru.custom.azilla.characters.Player;
 import ru.custom.azilla.managers.MapManager;
+import ru.custom.azilla.managers.SFXManager;
 import ru.custom.azilla.managers.VOManager;
 
 public class GameScreen implements Screen {
@@ -39,6 +40,7 @@ public class GameScreen implements Screen {
     VOManager voManager;
     Box2DDebugRenderer debugRenderer;
     MapManager mapManager;
+    SFXManager sfxManager = new SFXManager();
     public World world;
 
     ArrayList<Platform> platforms;
@@ -86,7 +88,6 @@ public class GameScreen implements Screen {
 
     void adaptLevel() {
         currentLevel++;
-        System.out.println("Changed currentLevel: " + currentLevel);
         maxX = GameSettings.TILE_SCALE * 16
             * (float) mapManager.map.getProperties().get("width", Integer.class)
             - GameSettings.SCREEN_WIDTH / 2;
@@ -111,6 +112,7 @@ public class GameScreen implements Screen {
         mapManager.getPlatforms(platforms, interactables, world);
         player.body.getWorld().destroyBody(player.body);
         player = new Player(width / 6, height / 3.5f, world);
+        if (currentLevel > 6) player.setDefaultJumpAmount(2);
         transitionReady = false;
     }
 
@@ -120,10 +122,13 @@ public class GameScreen implements Screen {
             short[] colisions = interactable.checkActOfContact(world.getContactList());
             boolean is12 = false;
             boolean is11 = false;
+            boolean is9 = false;
             for (short interaction : colisions) {
                 if (interaction == 12) is12 = true;
                 if (interaction == 11) is11 = true;
+                if (interaction == 9) is9 = true;
             }
+            if (is9) player.resetJumpAmount();
             if (interactable.actionId == 4) {
                 interactable.setIsVisible(transitionReady);
                 if (is12) {
@@ -201,26 +206,25 @@ public class GameScreen implements Screen {
             } else if (Gdx.input.isKeyPressed(Input.Keys.D)) {
                 player.moveSide(1);
             }
-            if (Gdx.input.isKeyJustPressed(Input.Keys.W)) {
-                player.moveUp();
+            if (Gdx.input.isKeyJustPressed(Input.Keys.W)
+                || Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
+                player.moveUpWithSound(sfxManager);
             }
-            if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
+            /*if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
                 mapManager.loadNextLevel();
                 adaptLevel();
-            }
+            }*/
         } else if (Gdx.input.isTouched()) {
             Vector3 vector3 = camera.unproject(new Vector3(
                 Gdx.input.getX(), Gdx.input.getY(), 0));
             float x = vector3.x;
 
             if (x <= GameSettings.SCREEN_WIDTH / 4) {
-                player.body.applyForceToCenter(-GameSettings.MOVE_COEFFICIENT,
-                    player.body.getLinearVelocity().y, true);
+                player.moveSide(-1);
             } else if (x > GameSettings.SCREEN_WIDTH / 4
             && x <= GameSettings.SCREEN_WIDTH / 2) {
-                player.body.applyForceToCenter(GameSettings.MOVE_COEFFICIENT,
-                    player.body.getLinearVelocity().y,true);
-            }
+                player.moveSide(1);
+            } else player.moveUpWithSound(sfxManager);
         }
     }
 

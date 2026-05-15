@@ -15,6 +15,7 @@ public class GameSettings {
     public static String CONCRETE = "CONCRETE.PNG";
     public static String PLAYER_CHARACTER = "stickman_general.png";
 
+    // Game related
     public static float WORLD_STEP_SIZE = 0.01f;
 
     public static float TILE_SCALE = SCREEN_HEIGHT / 10 / 16;
@@ -25,4 +26,7 @@ public class GameSettings {
     public static float GRAVITY_COEFFICIENT = -50;
     public static float JUMP_SPEED = 25;
     public static float MOVE_COEFFICIENT = 50;
+
+    // Громкость звука
+    public static final float SET_VOLUME = 1;
 }
