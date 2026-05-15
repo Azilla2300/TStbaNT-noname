@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.12.1" orientation="orthogonal" renderorder="left-down" width="30" height="20" tilewidth="16" tileheight="16" infinite="0" nextlayerid="5" nextobjectid="22">
+ <tileset firstgid="1" source="tilemap.tsx"/>
+ <objectgroup id="2" name="limiters" class="Platform">
+  <object id="1" type="Platform" x="0" y="0" width="480" height="16"/>
+  <object id="2" type="Platform" x="464" y="0" width="16" height="320"/>
+  <object id="3" type="Platform" x="0" y="304" width="480" height="16"/>
+  <object id="4" type="Platform" x="0" y="0" width="16" height="320"/>
+  <object id="15" x="304" y="256" width="176" height="64"/>
+ </objectgroup>
+ <objectgroup id="4" name="interactable" class="PlatformInteractable">
+  <object id="16" type="PlatformInteracable" x="304" y="176" width="176" height="80">
+   <properties>
+    <property name="action" value="disapear"/>
+   </properties>
+  </object>
+  <object id="19" type="PlatformInteracable" x="256" y="32" width="32" height="32">
+   <properties>
+    <property name="action" value="pickup"/>
+   </properties>
+  </object>
+  <object id="20" type="PlatformInteracable" x="416" y="176" width="48" height="80">
+   <properties>
+    <property name="action" value="endlevel"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup id="3" name="platforms" class="Platform">
+  <object id="6" type="Platform" x="0" y="112" width="96" height="16"/>
+  <object id="7" type="Platform" x="208" y="80" width="96" height="16"/>
+  <object id="8" type="Platform" x="176" y="160" width="128" height="16"/>
+  <object id="9" type="Platform" x="160" y="256" width="144" height="16"/>
+  <object id="10" type="Platform" x="0" y="208" width="112" height="16"/>
+  <object id="11" type="Platform" x="304" y="0" width="176" height="176"/>
+ </objectgroup>
+ <layer id="1" name="tileset" width="30" height="20">
+  <data encoding="csv">
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,
+1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,
+1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,
+1,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,
+1,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
+</data>
+ </layer>
+</map>
