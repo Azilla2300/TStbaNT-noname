@@ -1,7 +1,5 @@
 package ru.custom.azilla.managers;
 
-import com.badlogic.gdx.audio.Sound;
-
 import ru.custom.azilla.elements.VOPart;
 
 public class VOManager {
